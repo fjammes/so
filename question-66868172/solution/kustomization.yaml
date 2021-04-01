@@ -1,6 +1,35 @@
 namespace: foo-namespace
 
 namePrefix: foo-prefix-
-
+patchesJson6902:
+- patch: |-
+    - op: replace
+      path: /kind
+      value: Role
+    - op: add
+      path: /metadata/namespace
+      value: 
+        <NAMESPACE>
+  target:
+    group: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: manager-role
+    version: v1
+- patch: |-
+    - op: replace
+      path: /kind
+      value: RoleBinding
+    - op: add
+      path: /metadata/namespace
+      value: 
+        <NAMESPACE>
+    - op: replace
+      path: /roleRef/kind
+      value: Role
+  target:
+    group: rbac.authorization.k8s.io
+    kind: ClusterRoleBinding
+    name: my-cluster-role-binding
+    version: v1
 resources:
 - my-resources.yaml

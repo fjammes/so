@@ -1,15 +1,45 @@
+namePrefix: qserv-operator-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patchesJson6902:
 - patch: |-
     - op: replace
+      path: /metadata/name
+      value: <NAMESPACE>
+  target:
+    kind: Namespace
+    name: system
+    version: v1
+- patch: |-
+    - op: replace
+      path: /kind
+      value: Role
+    - op: add
+      path: /metadata/namespace
+      value: 
+        <NAMESPACE>
+  target:
+    group: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: manager-role
+    version: v1
+- patch: |-
+    - op: replace
       path: /kind
       value: RoleBinding
+    - op: add
+      path: /metadata/namespace
+      value: 
+        <NAMESPACE>
+    - op: replace
+      path: /roleRef/kind
+      value: Role
   target:
     group: rbac.authorization.k8s.io
     kind: ClusterRoleBinding
     name: manager-rolebinding
     version: v1
 resources:
+- role.yaml 
 - role_binding.yaml 
 namespace: <NAMESPACE>
