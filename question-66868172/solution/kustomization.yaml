@@ -1,0 +1,6 @@
+namespace: foo-namespace
+
+namePrefix: foo-prefix-
+
+resources:
+- my-resources.yaml
