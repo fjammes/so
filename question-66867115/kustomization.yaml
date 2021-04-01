@@ -1,0 +1,16 @@
+namespace: my-namespace
+patchesStrategicMerge:
+- manager_patch.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patchesJson6902:
+- patch: |-
+    - op: replace
+      path: /metadata/name
+      value: <NAMESPACE>
+  target:
+    kind: Namespace
+    name: system
+    version: v1
+resources:
+- manager.yaml
