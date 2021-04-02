@@ -32,6 +32,6 @@ patchesJson6902:
     name: manager-rolebinding
     version: v1
 resources:
-- role.yaml 
 - role_binding.yaml 
+- service_account.yaml
 namespace: <NAMESPACE>
