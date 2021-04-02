@@ -4,14 +4,6 @@ kind: Kustomization
 patchesJson6902:
 - patch: |-
     - op: replace
-      path: /metadata/name
-      value: <NAMESPACE>
-  target:
-    kind: Namespace
-    name: system
-    version: v1
-- patch: |-
-    - op: replace
       path: /kind
       value: Role
     - op: add
